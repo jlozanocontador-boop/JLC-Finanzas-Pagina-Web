@@ -1,12 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ShieldCheck, MessageCircle, ArrowRight, CalendarCheck, CheckCircle2 } from "lucide-react";
-
-const trustBadges = [
-  "+500 clientes satisfechos",
-  "Atención 100% en línea",
-  "Respuesta en menos de 24 hrs",
-];
+import { MessageCircle, ArrowRight, CalendarCheck } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -24,12 +18,7 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-gold-light">
-            <ShieldCheck className="h-4 w-4" />
-            Despacho Fiscal de Confianza
-          </span>
-
-          <h1 className="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
             ¿Ocupado con tus <span className="text-gold">impuestos</span>?
             <br />
             Nosotros te ayudamos.
@@ -65,15 +54,6 @@ export default function Hero() {
               Ver Servicios
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:gap-8">
-            {trustBadges.map((badge) => (
-              <div key={badge} className="flex items-center gap-2 text-sm text-white/70">
-                <CheckCircle2 className="h-4 w-4 text-gold" />
-                {badge}
-              </div>
-            ))}
           </div>
         </div>
       </div>

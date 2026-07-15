@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import {
   FileText,
@@ -6,7 +9,7 @@ import {
   ShieldCheck,
   Calculator,
   Briefcase,
-  ChevronRight,
+  Plus,
   ArrowRight,
 } from "lucide-react";
 
@@ -44,42 +47,57 @@ const services = [
 ];
 
 export default function Services() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section className="bg-gray-50 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
           <span className="text-sm font-bold uppercase tracking-wide text-gold">
             Nuestros Servicios
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="mt-3 text-4xl font-bold text-navy sm:text-5xl">
             Soluciones fiscales a tu medida
           </h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-lg text-gray-600">
             Ofrecemos una amplia gama de servicios fiscales y contables para
             que cumplas con tus obligaciones sin complicaciones.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="group rounded-xl bg-white p-8 shadow-sm ring-1 ring-gray-100 transition hover:shadow-md"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 transition-colors group-hover:bg-gold/15">
-                <Icon className="h-6 w-6 text-navy transition-colors group-hover:text-gold" />
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-navy">{title}</h3>
-              <p className="mt-2 text-sm text-gray-600">{description}</p>
-              <Link
-                href="/servicios"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:text-gold-light"
+        <div className="mt-12 space-y-4">
+          {services.map(({ icon: Icon, title, description }, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={title}
+                className="overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-gray-100"
               >
-                Más información
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </div>
-          ))}
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center gap-5 p-6 text-left"
+                >
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-gray-100">
+                    <Icon className="h-7 w-7 text-navy" />
+                  </div>
+                  <span className="flex-1 text-xl font-bold text-navy sm:text-2xl">
+                    {title}
+                  </span>
+                  <Plus
+                    className={`h-6 w-6 shrink-0 text-gold transition-transform duration-200 ${
+                      isOpen ? "rotate-45" : ""
+                    }`}
+                  />
+                </button>
+                {isOpen && (
+                  <p className="px-6 pb-6 pl-[calc(3.5rem+1.25rem+1.5rem)] text-gray-600 sm:text-lg">
+                    {description}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-12 text-center">

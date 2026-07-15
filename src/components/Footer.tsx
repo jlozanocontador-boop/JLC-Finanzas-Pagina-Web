@@ -8,7 +8,6 @@ const navLinks = [
   { href: "/servicios", label: "Servicios" },
   { href: "/agendar-cita", label: "Agendar Cita" },
   { href: "/contacto", label: "Contacto" },
-  { href: "/pagos", label: "Pagos" },
 ];
 
 const serviceLinks = [

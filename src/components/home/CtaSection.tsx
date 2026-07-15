@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarCheck, MessageCircle, CreditCard } from "lucide-react";
+import { CalendarCheck, MessageCircle } from "lucide-react";
 
 export default function CtaSection() {
   return (
@@ -30,13 +30,6 @@ export default function CtaSection() {
             <MessageCircle className="h-4 w-4" />
             Contactar por WhatsApp
           </a>
-          <Link
-            href="/pagos"
-            className="flex items-center justify-center gap-2 rounded-lg border border-gold px-6 py-3 text-sm font-semibold text-gold transition hover:bg-gold/10"
-          >
-            <CreditCard className="h-4 w-4" />
-            Realizar Pago
-          </Link>
         </div>
       </div>
     </section>
