@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 const cards = [
   { icon: Phone, title: "Teléfono", value: "(81) 3578-0250" },
   { icon: Mail, title: "Correo", value: "jlozanocontador@gmail.com" },
-  { icon: MapPin, title: "Ubicación", value: "Guadalupe, México" },
+  { icon: MapPin, title: "Ubicación", value: "Dos Ríos, Guadalupe, México" },
   {
     icon: Clock,
     title: "Horario",

@@ -110,7 +110,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-gold" />
-              Guadalupe, México
+              Dos Ríos, Guadalupe, México
             </li>
             <li className="flex items-start gap-2">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" />

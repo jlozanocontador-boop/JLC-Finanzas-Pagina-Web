@@ -9,8 +9,8 @@ export default function CtaSection() {
           ¿Listo para poner en orden tus finanzas?
         </h2>
         <p className="mt-4 text-white/70">
-          Agenda una cita hoy y recibe asesoría personalizada. Tu primera
-          consulta es sin compromiso.
+          Agenda una cita hoy y recibe asesoría personalizada. Obtén
+          orientación profesional adaptada a tu situación fiscal.
         </p>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -19,7 +19,7 @@ export default function CtaSection() {
             className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
           >
             <CalendarCheck className="h-4 w-4" />
-            Agendar Cita Gratis
+            Agendar Cita
           </Link>
           <a
             href="https://wa.me/528135780250"

@@ -4,18 +4,6 @@ import { FacebookIcon, InstagramIcon, TikTokIcon } from "@/components/icons/Soci
 export default function MapAndSocial() {
   return (
     <div className="flex flex-col gap-6">
-      <div className="overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-100">
-        <iframe
-          title="Ubicación de JLC Finanzas"
-          src="https://www.google.com/maps?q=Ciudad+de+México,+México&output=embed"
-          width="100%"
-          height="280"
-          style={{ border: 0 }}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
-
       <div className="rounded-xl bg-navy p-7">
         <h3 className="text-lg font-bold text-gold">
           Respuesta inmediata por WhatsApp

@@ -105,7 +105,7 @@ export type ServiceCategory = {
 export const serviceCategories: ServiceCategory[] = [
   {
     icon: FileText,
-    title: "Servicios Individuales",
+    title: "Servicios Fiscales",
     description:
       "Trámites puntuales y esporádicos para resolver una necesidad específica, sin compromiso de permanencia.",
     badge: "Pago único por trámite",
@@ -122,7 +122,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     icon: Repeat,
-    title: "Servicio Mensual",
+    title: "Servicio Contabilidad",
     description:
       "Contabilidad y cumplimiento fiscal recurrente, adaptado a tu régimen. Incluye declaraciones mensuales, facturación y apoyo administrativo continuo.",
     badge: "Adaptado a tu régimen fiscal",
