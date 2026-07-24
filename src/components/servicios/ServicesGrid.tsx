@@ -1,13 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, CalendarCheck, Check } from "lucide-react";
 import { serviceCategories } from "./data";
+import QuoteWizard from "./QuoteWizard";
 
 export default function ServicesGrid() {
+  const [activeQuote, setActiveQuote] = useState<"fiscal" | "contabilidad" | null>(null);
+
   return (
     <section className="bg-gray-50 py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {serviceCategories.map(({ icon: Icon, title, description, badge, items, cta }) => (
+          {serviceCategories.map(({ icon: Icon, title, description, badge, items, cta, quoteType }) => (
             <div
               key={title}
               className="flex flex-col rounded-xl bg-white p-8 shadow-sm ring-1 ring-gray-100"
@@ -32,16 +38,14 @@ export default function ServicesGrid() {
               </ul>
 
               <div className="mt-6">
-                {cta === "cotizar" ? (
-                  <a
-                    href="https://wa.me/528135780250"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                {cta === "cotizar" && quoteType ? (
+                  <button
+                    onClick={() => setActiveQuote(quoteType)}
                     className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-gold px-3 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-light"
                   >
                     <MessageCircle className="h-4 w-4" />
                     Cotizar
-                  </a>
+                  </button>
                 ) : (
                   <Link
                     href="/agendar-cita"
@@ -56,6 +60,10 @@ export default function ServicesGrid() {
           ))}
         </div>
       </div>
+
+      {activeQuote && (
+        <QuoteWizard type={activeQuote} onClose={() => setActiveQuote(null)} />
+      )}
     </section>
   );
 }

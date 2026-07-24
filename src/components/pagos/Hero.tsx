@@ -1,4 +1,5 @@
 import { Shield, Lock, CheckCircle2 } from "lucide-react";
+import BackButton from "./BackButton";
 
 const badges = [
   { icon: Shield, text: "Pagos 100% seguros" },
@@ -9,7 +10,8 @@ const badges = [
 export default function Hero() {
   return (
     <>
-      <section className="bg-navy py-20">
+      <section className="relative bg-navy py-20">
+        <BackButton />
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <span className="text-sm font-bold uppercase tracking-wide text-gold">
             Pagos
