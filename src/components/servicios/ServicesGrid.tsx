@@ -44,7 +44,7 @@ export default function ServicesGrid() {
                     className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-gold px-3 py-2.5 text-sm font-semibold text-navy transition hover:bg-gold-light"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    Cotizar
+                    Ver más Información
                   </button>
                 ) : (
                   <Link

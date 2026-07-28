@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, ArrowRight, CalendarCheck } from "lucide-react";
+import { MessageCircle, Calculator } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -19,24 +19,23 @@ export default function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            ¿Ocupado con tus <span className="text-gold">impuestos</span>?
-            <br />
-            Nosotros te ayudamos.
+            Tu contabilidad y obligaciones ante el{" "}
+            <span className="text-gold">SAT</span>, atendidas en línea
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-white/70">
-            En JLC Finanzas te apoyamos con trámites fiscales, declaraciones,
-            asesoría y cumplimiento ante el SAT de forma clara, profesional y
-            personalizada.
+            Servicios fiscales para personas físicas, emprendedores y
+            pequeños negocios. Recibe atención directa, explicaciones claras
+            y seguimiento por WhatsApp.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/agendar-cita"
+              href="/servicios"
               className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
             >
-              <CalendarCheck className="h-4 w-4" />
-              Agendar Cita
+              <Calculator className="h-4 w-4" />
+              Cotizar Nuestro Servicio
             </Link>
             <a
               href="https://wa.me/528135780250"
@@ -47,13 +46,6 @@ export default function Hero() {
               <MessageCircle className="h-4 w-4" />
               Enviar WhatsApp
             </a>
-            <Link
-              href="/servicios"
-              className="flex items-center justify-center gap-2 rounded-lg border border-gold px-6 py-3 text-sm font-semibold text-gold transition hover:bg-gold/10"
-            >
-              Ver Servicios
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
       </div>

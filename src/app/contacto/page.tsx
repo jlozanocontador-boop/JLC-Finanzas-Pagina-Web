@@ -1,6 +1,5 @@
 import PageHero from "@/components/PageHero";
 import InfoCards from "@/components/contacto/InfoCards";
-import ContactForm from "@/components/contacto/ContactForm";
 import MapAndSocial from "@/components/contacto/MapAndSocial";
 
 export default function ContactoPage() {
@@ -13,8 +12,7 @@ export default function ContactoPage() {
       />
       <InfoCards />
       <section className="bg-white py-16">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <ContactForm />
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           <MapAndSocial />
         </div>
       </section>

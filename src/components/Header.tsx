@@ -40,7 +40,7 @@ export default function Header() {
           </div>
           <div className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Lun-Jue 18-22h · Dom 9-15h</span>
+            <span className="hidden sm:inline">Lun-Jue 19-23h · Dom 8-14h</span>
           </div>
         </div>
       </div>

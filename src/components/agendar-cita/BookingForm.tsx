@@ -1,63 +1,44 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CalendarCheck, CheckCircle2, Loader2 } from "lucide-react";
+import { CreditCard, Pencil, Phone, Video } from "lucide-react";
 import { services } from "@/components/servicios/data";
-import { supabase } from "@/lib/supabase";
+import { formatMXN } from "@/components/servicios/quoteData";
+import type { AsesoriaType, DateTimeSelection, BookingFormData } from "./BookingFlow";
 
-const timeSlots = [
-  "9:00 - 10:00",
-  "10:00 - 11:00",
-  "11:00 - 12:00",
-  "12:00 - 13:00",
-  "14:00 - 15:00",
-  "15:00 - 16:00",
-  "16:00 - 17:00",
-  "17:00 - 18:00",
+const modalidades: { id: BookingFormData["modalidad"]; label: string; icon: typeof Phone }[] = [
+  { id: "Llamada", label: "Llamada", icon: Phone },
+  { id: "Videollamada", label: "Videollamada", icon: Video },
 ];
 
-export default function BookingForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export default function BookingForm({
+  asesoria,
+  dateTime,
+  initialData,
+  onSubmit,
+  onChangeAsesoria,
+  onChangeDateTime,
+}: {
+  asesoria: AsesoriaType;
+  dateTime: DateTimeSelection;
+  initialData: BookingFormData | null;
+  onSubmit: (data: BookingFormData) => void;
+  onChangeAsesoria: () => void;
+  onChangeDateTime: () => void;
+}) {
+  const [nombre, setNombre] = useState(initialData?.nombre ?? "");
+  const [telefono, setTelefono] = useState(initialData?.telefono ?? "");
+  const [correo, setCorreo] = useState(initialData?.correo ?? "");
+  const [servicioInteres, setServicioInteres] = useState(initialData?.servicioInteres ?? "");
+  const [modalidad, setModalidad] = useState<BookingFormData["modalidad"] | "">(
+    initialData?.modalidad ?? ""
+  );
+  const [mensaje, setMensaje] = useState(initialData?.mensaje ?? "");
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    const data = new FormData(e.currentTarget);
-    const { error } = await supabase.from("solicitudes_cita").insert({
-      nombre: data.get("nombre") as string,
-      telefono: data.get("telefono") as string,
-      correo: (data.get("correo") as string) || null,
-      servicio_interes: data.get("servicio_interes") as string,
-      fecha_preferida: data.get("fecha_preferida") as string,
-      hora_preferida: data.get("hora_preferida") as string,
-      mensaje: (data.get("mensaje") as string) || null,
-    });
-
-    setLoading(false);
-    if (error) {
-      setError("No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.");
-      return;
-    }
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center rounded-xl bg-white p-10 text-center shadow-sm ring-1 ring-gray-100">
-        <CheckCircle2 className="h-12 w-12 text-gold" />
-        <h3 className="mt-4 text-xl font-bold text-navy">
-          ¡Solicitud enviada!
-        </h3>
-        <p className="mt-2 text-sm text-gray-600">
-          Gracias por agendar tu cita. Te contactaremos en menos de 24 horas
-          para confirmar los detalles.
-        </p>
-      </div>
-    );
+    if (!modalidad) return;
+    onSubmit({ nombre, telefono, correo, servicioInteres, modalidad, mensaje });
   }
 
   return (
@@ -65,17 +46,48 @@ export default function BookingForm() {
       onSubmit={handleSubmit}
       className="rounded-xl bg-white p-8 shadow-sm ring-1 ring-gray-100"
     >
-      <h2 className="text-xl font-bold text-navy">Completa tus datos</h2>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between gap-4 rounded-lg bg-gold/10 px-4 py-3">
+          <p className="text-sm font-bold text-navy">
+            {asesoria.label} — {formatMXN(asesoria.price)}
+          </p>
+          <button
+            type="button"
+            onClick={onChangeAsesoria}
+            className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-navy transition hover:border-gold"
+          >
+            <Pencil className="h-3.5 w-3.5" />
+            Cambiar
+          </button>
+        </div>
+        <div className="flex items-center justify-between gap-4 rounded-lg bg-gold/10 px-4 py-3">
+          <p className="text-sm font-bold text-navy">
+            {dateTime.dateLabel} — {dateTime.time}
+          </p>
+          <button
+            type="button"
+            onClick={onChangeDateTime}
+            className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-navy transition hover:border-gold"
+          >
+            <Pencil className="h-3.5 w-3.5" />
+            Cambiar
+          </button>
+        </div>
+      </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <p className="mt-4 text-xs font-bold uppercase tracking-wide text-gold">
+        Paso 3
+      </p>
+      <h2 className="mt-1 text-xl font-bold text-navy">Completa tus datos</h2>
+
+      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
         <div>
-          <label className="text-sm font-medium text-navy">
-            Nombre completo *
-          </label>
+          <label className="text-sm font-medium text-navy">Nombre *</label>
           <input
             required
-            name="nombre"
             type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
             placeholder="Tu nombre"
             className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
@@ -84,33 +96,32 @@ export default function BookingForm() {
           <label className="text-sm font-medium text-navy">Teléfono *</label>
           <input
             required
-            name="telefono"
             type="tel"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
             placeholder="(55) 1234-5678"
             className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
         </div>
-
-        <div className="sm:col-span-2">
-          <label className="text-sm font-medium text-navy">
-            Correo electrónico
-          </label>
+        <div>
+          <label className="text-sm font-medium text-navy">Correo</label>
           <input
-            name="correo"
             type="email"
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
             placeholder="tu@correo.com"
             className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-3">
           <label className="text-sm font-medium text-navy">
             Servicio de interés *
           </label>
           <select
             required
-            name="servicio_interes"
-            defaultValue=""
+            value={servicioInteres}
+            onChange={(e) => setServicioInteres(e.target.value)}
             className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 focus:border-gold focus:outline-none"
           >
             <option value="" disabled>
@@ -124,64 +135,51 @@ export default function BookingForm() {
           </select>
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-navy">
-            Fecha preferida *
-          </label>
-          <input
-            required
-            name="fecha_preferida"
-            type="date"
-            className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 focus:border-gold focus:outline-none"
-          />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-navy">
-            Hora preferida *
-          </label>
-          <select
-            required
-            name="hora_preferida"
-            defaultValue=""
-            className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 focus:border-gold focus:outline-none"
-          >
-            <option value="" disabled>
-              Selecciona hora
-            </option>
-            {timeSlots.map((slot) => (
-              <option key={slot} value={slot}>
-                {slot}
-              </option>
-            ))}
-          </select>
+        <div className="sm:col-span-3">
+          <label className="text-sm font-medium text-navy">Modalidad *</label>
+          <div className="mt-1.5 grid grid-cols-2 gap-3">
+            {modalidades.map(({ id, label, icon: Icon }) => {
+              const active = modalidad === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setModalidad(id)}
+                  className={`flex items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-semibold transition ${
+                    active
+                      ? "border-gold bg-gold/10 text-navy"
+                      : "border-gray-200 text-gray-600 hover:border-gold/50"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-3">
           <label className="text-sm font-medium text-navy">
-            Mensaje adicional
+            Cuéntanos brevemente tu situación para darte una asesoría de la
+            mejor manera
           </label>
           <textarea
-            name="mensaje"
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
             rows={4}
-            placeholder="Cuéntanos brevemente tu situación o dudas..."
+            placeholder="Escribe aquí..."
             className="mt-1.5 w-full resize-none rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
         </div>
       </div>
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
-
       <button
         type="submit"
-        disabled={loading}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light disabled:opacity-60"
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
       >
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <CalendarCheck className="h-4 w-4" />
-        )}
-        {loading ? "Enviando..." : "Enviar Solicitud de Cita"}
+        <CreditCard className="h-4 w-4" />
+        Ir a Pago
       </button>
     </form>
   );

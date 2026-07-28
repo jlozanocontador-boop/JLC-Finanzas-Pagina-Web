@@ -1,13 +1,12 @@
-import { MessageCircle, Clock, Shield, Zap, CheckCircle2 } from "lucide-react";
+import { MessageCircle, Clock, Shield, Zap } from "lucide-react";
 
 const infoItems = [
   {
     icon: Clock,
-    text: "Horario: Lun - Jue 18:00-22:00 · Vie y Sáb cerrado · Dom 9:00-15:00",
+    text: "Horario: Lun - Jue 19:00-23:00 · Vie y Sáb cerrado · Dom 8:00-14:00",
   },
   { icon: Shield, text: "Tu información es confidencial y segura" },
   { icon: Zap, text: "Confirmación en menos de 24 horas" },
-  { icon: CheckCircle2, text: "Primera consulta sin compromiso" },
 ];
 
 export default function Sidebar() {

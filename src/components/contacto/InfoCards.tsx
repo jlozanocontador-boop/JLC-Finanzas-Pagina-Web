@@ -7,7 +7,7 @@ const cards = [
   {
     icon: Clock,
     title: "Horario",
-    value: "Lun - Jue: 18:00 - 22:00\nVie - Sáb: Cerrado\nDom: 9:00 - 15:00",
+    value: "Lun - Jue: 19:00 - 23:00\nVie - Sáb: Cerrado\nDom: 8:00 - 14:00",
   },
 ];
 

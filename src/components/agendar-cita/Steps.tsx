@@ -1,21 +1,27 @@
-import { Calendar, Phone, MessageCircle } from "lucide-react";
+import { ListChecks, Calendar, Phone, MessageCircle } from "lucide-react";
 
 const steps = [
   {
-    icon: Calendar,
+    icon: ListChecks,
     step: "Paso 1",
+    title: "Elige el tipo de asesoría",
+    description: "Selecciona entre asesoría sencilla o personalizada.",
+  },
+  {
+    icon: Calendar,
+    step: "Paso 2",
     title: "Elige fecha y hora",
     description: "Selecciona el día y horario que mejor te convenga.",
   },
   {
     icon: Phone,
-    step: "Paso 2",
+    step: "Paso 3",
     title: "Confirmación",
     description: "Te contactamos para confirmar tu cita por WhatsApp o llamada.",
   },
   {
     icon: MessageCircle,
-    step: "Paso 3",
+    step: "Paso 4",
     title: "Asesoría",
     description: "Recibe atención personalizada en la fecha acordada.",
   },
@@ -25,7 +31,7 @@ export default function Steps() {
   return (
     <section className="bg-gray-50 py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ icon: Icon, step, title, description }) => (
             <div key={step} className="flex gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold/15">

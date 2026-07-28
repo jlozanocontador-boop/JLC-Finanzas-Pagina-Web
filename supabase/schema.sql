@@ -15,8 +15,17 @@ create table if not exists public.solicitudes_cita (
   fecha_preferida date not null,
   hora_preferida text not null,
   mensaje text,
+  tipo_asesoria text,
+  precio_asesoria numeric(12, 2),
+  modalidad text,
   estatus text not null default 'pendiente'
 );
+
+-- Si la tabla ya existía antes de agregar el Paso 1 (tipo de asesoría),
+-- ejecuta estas dos líneas para agregar las columnas nuevas sin perder datos:
+-- alter table public.solicitudes_cita add column if not exists tipo_asesoria text;
+-- alter table public.solicitudes_cita add column if not exists precio_asesoria numeric(12, 2);
+-- alter table public.solicitudes_cita add column if not exists modalidad text;
 
 alter table public.solicitudes_cita enable row level security;
 
