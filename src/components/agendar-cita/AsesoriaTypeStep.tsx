@@ -1,9 +1,11 @@
-import { MessageCircle, Users, Check, Clock } from "lucide-react";
+import { MessageCircle, Users, Check, Clock, ArrowRight } from "lucide-react";
 import { formatMXN } from "@/components/servicios/quoteData";
 import type { AsesoriaType } from "./BookingFlow";
+import WhatsAppCard from "./WhatsAppCard";
 
 const options: (AsesoriaType & {
   icon: typeof MessageCircle;
+  tagline: string;
   description: string;
   features: string[];
 })[] = [
@@ -14,11 +16,12 @@ const options: (AsesoriaType & {
     durationLabel: "25 min",
     slotInterval: 30,
     icon: MessageCircle,
+    tagline: "Ideal para dudas específicas y concretas.",
     description: "Resolución de dudas puntuales y orientación general sobre tu situación fiscal.",
     features: [
-      "Sesión única de asesoría",
+      "Resolución de dudas puntuales",
       "Orientación sobre tu régimen y obligaciones",
-      "Resolución de dudas específicas",
+      "Recomendaciones Inmediatas",
     ],
   },
   {
@@ -28,9 +31,11 @@ const options: (AsesoriaType & {
     durationLabel: "55 min",
     slotInterval: 60,
     icon: Users,
+    tagline: "Ideal para dudas más abiertas o revisar a detalle tu caso.",
     description: "Análisis a profundidad de tu situación, plan de acción y seguimiento cercano.",
     features: [
-      "Revisión completa de tu situación fiscal",
+      "Análisis Completo",
+      "Revisión a Detalle de tus Documentos",
       "Plan de acción personalizado",
       "Seguimiento posterior a la cita",
     ],
@@ -57,23 +62,26 @@ export default function AsesoriaTypeStep({
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {options.map(({ id, label, price, durationLabel, slotInterval, icon: Icon, description, features }) => (
+        {options.map(({ id, label, price, durationLabel, slotInterval, icon: Icon, tagline, description, features }) => (
           <button
             key={id}
             onClick={() => onSelect({ id, label, price, durationLabel, slotInterval })}
             className="group flex flex-col rounded-xl border border-gray-200 p-8 text-left transition hover:border-gold hover:shadow-md"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/15">
-              <Icon className="h-6 w-6 text-gold" />
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gold/15">
+                <Icon className="h-6 w-6 text-gold" />
+              </div>
+              <h3 className="text-xl font-bold text-navy">{label}</h3>
             </div>
-            <h3 className="mt-5 text-xl font-bold text-navy">{label}</h3>
-            <div className="mt-2 flex items-center gap-3">
-              <p className="text-3xl font-bold text-gold">{formatMXN(price)}</p>
-              <span className="flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
-                <Clock className="h-3.5 w-3.5" />
+            <div className="mt-3 flex items-center justify-center gap-3">
+              <p className="text-4xl font-bold text-gold">{formatMXN(price)}</p>
+              <span className="flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-sm font-semibold text-gray-600">
+                <Clock className="h-4 w-4" />
                 {durationLabel}
               </span>
             </div>
+            <p className="mt-3 text-sm text-gray-500">{tagline}</p>
             <p className="mt-3 text-sm text-gray-600">{description}</p>
 
             <ul className="mt-4 space-y-2">
@@ -85,11 +93,16 @@ export default function AsesoriaTypeStep({
               ))}
             </ul>
 
-            <span className="mt-6 flex items-center justify-center rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition group-hover:bg-gold-light">
-              Seleccionar
+            <span className="mt-6 flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition group-hover:bg-gold-light">
+              Continuar Registro
+              <ArrowRight className="h-4 w-4" />
             </span>
           </button>
         ))}
+      </div>
+
+      <div className="mt-6">
+        <WhatsAppCard />
       </div>
     </div>
   );

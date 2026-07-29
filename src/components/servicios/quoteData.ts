@@ -100,27 +100,54 @@ export const fiscalTramites: FiscalTramite[] = [
       ],
     },
   },
+  {
+    id: "alta-local-sat",
+    label: "Alta Local/Negocio SAT (Apertura Establecimiento)",
+    price: 1200,
+    followUp: efirmaCiecFollowUp,
+  },
   { id: "constancia", label: "Constancia de Situación Fiscal", price: 250 },
   { id: "cambio-domicilio", label: "Cambio de Domicilio Fiscal", price: 350 },
   { id: "regularizacion", label: "Regularización Fiscal", price: 350 },
-  { id: "efirma", label: "Trámites de e.firma y Obligaciones Fiscales", price: 450 },
-  { id: "revision-fiscal", label: "Revisión Fiscal", price: 450 },
+  { id: "revision-fiscal", label: "Revisión Fiscal", price: 350 },
   {
     id: "renovacion-fiel",
-    label: "Renovación FIEL",
+    label: "Renovación FIEL En línea",
     followUp: {
-      question: "¿Tienes tu firma electrónica (FIEL)?",
+      question: "¿Eres persona física o moral?",
       options: [
         {
-          label: "Sí, la tengo",
+          label: "Persona Física",
           followUp: {
-            question: "¿Tu firma electrónica está vigente?",
+            question: "¿Cuentas con tu firma electrónica (FIEL)?",
             options: [
               { label: "Sí, está vigente", price: 1000 },
+              { label: "No, está vencida", price: 1500 },
               { label: "No estoy seguro(a)", redirectToId: "revision-fiscal" },
             ],
           },
         },
+        {
+          label: "Persona Moral",
+          followUp: {
+            question: "¿Cuentas con tu firma electrónica (FIEL)?",
+            options: [
+              { label: "Sí, está vigente", price: 2000 },
+              { label: "No, está vencida", price: 3000 },
+              { label: "No estoy seguro(a)", redirectToId: "revision-fiscal" },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "sellos-digitales",
+    label: "Sellos Digitales",
+    followUp: {
+      question: "¿Cuentas con tu firma electrónica (FIEL)?",
+      options: [
+        { label: "Sí, la tengo", price: 1000 },
         { label: "No estoy seguro(a)", redirectToId: "revision-fiscal" },
       ],
     },

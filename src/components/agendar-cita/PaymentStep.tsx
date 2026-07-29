@@ -97,8 +97,8 @@ export default function PaymentStep({
         </h2>
         <p className="mt-2 text-gray-600">
           Hemos recibido tu solicitud para el {dateTime.dateLabel} a las{" "}
-          {dateTime.time}. Nos pondremos en contacto contigo por{" "}
-          {formData.modalidad.toLowerCase()} para confirmar los detalles.
+          {dateTime.time}. Nos pondremos en contacto contigo para confirmar
+          los detalles.
         </p>
       </div>
     );
@@ -218,7 +218,7 @@ export default function PaymentStep({
         ) : (
           <Lock className="h-4 w-4" />
         )}
-        Enviar Solicitud de Asesoría
+        Agendar Asesoría
       </button>
       <button
         type="button"

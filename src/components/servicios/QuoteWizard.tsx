@@ -152,7 +152,7 @@ function ResultStep({
       <p className="mt-4 text-sm text-gray-600">{summary}</p>
       <p className="mt-3 text-3xl font-bold text-navy">{formatMXN(price)}</p>
       <p className="mt-1 text-xs text-gray-400">
-        Cotización estimada. El precio final se confirma contigo antes de iniciar.
+        Este precio corresponde a una revisión previa. La cotización final se te enviará después de dicha revisión.
       </p>
 
       <div className="mt-6 flex flex-col gap-2">

@@ -220,7 +220,7 @@ export default function DateTimeStep({
                 className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
               >
                 <CalendarCheck className="h-4 w-4" />
-                Sí, confirmar
+                Sí, Continuar
               </button>
               <button
                 onClick={() => setPendingSlot(null)}

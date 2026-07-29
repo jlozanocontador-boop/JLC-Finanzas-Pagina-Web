@@ -99,7 +99,7 @@ export default function BookingForm({
             type="tel"
             value={telefono}
             onChange={(e) => setTelefono(e.target.value)}
-            placeholder="(55) 1234-5678"
+            placeholder="Ej. 81 1234 5678"
             className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
         </div>
@@ -168,7 +168,7 @@ export default function BookingForm({
             value={mensaje}
             onChange={(e) => setMensaje(e.target.value)}
             rows={4}
-            placeholder="Escribe aquí..."
+            placeholder="Coméntanos la situación o tema(s) que te gustaría tratar en la asesoría"
             className="mt-1.5 w-full resize-none rounded-lg border border-gray-300 px-3 py-2.5 text-sm placeholder:text-gray-400 focus:border-gold focus:outline-none"
           />
         </div>
