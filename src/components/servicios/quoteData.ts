@@ -121,8 +121,8 @@ export const fiscalTramites: FiscalTramite[] = [
           followUp: {
             question: "¿Cuentas con tu firma electrónica (FIEL)?",
             options: [
-              { label: "Sí, está vigente", price: 1000 },
-              { label: "No, está vencida", price: 1500 },
+              { label: "Sí, está vigente", price: 500 },
+              { label: "No, está vencida", price: 850 },
               { label: "No estoy seguro(a)", redirectToId: "revision-fiscal" },
             ],
           },
@@ -154,28 +154,99 @@ export const fiscalTramites: FiscalTramite[] = [
   },
 ];
 
-export const facturacionRanges = [
-  "Menos de $50,000",
-  "$50,000 – $150,000",
-  "Más de $150,000",
-];
+export type PlanRow = {
+  label: string;
+  basico: string | boolean;
+  avanzado: string | boolean;
+};
 
 export type ContabilidadRegimen = {
   id: string;
   label: string;
-  prices: [number, number, number];
+  basicoPrice: number;
+  avanzadoPrice: number;
+  rows: PlanRow[];
 };
 
+const actEmpProfRows: PlanRow[] = [
+  { label: "Declaraciones mensuales de ISR e IVA", basico: true, avanzado: true },
+  { label: "Declaración anual", basico: false, avanzado: true },
+  { label: "Facturación mensual", basico: "Hasta 5-10 CFDI", avanzado: "Hasta 20 CFDI" },
+  { label: "Revisión de ingresos y gastos", basico: "Revisión básica", avanzado: "Revisión detallada" },
+  { label: "Revisión de deducibilidad", basico: "Básica", avanzado: "Detallada" },
+  { label: "Conciliación de ingresos, gastos y bancos", basico: false, avanzado: true },
+  { label: "Control de cuentas por cobrar", basico: false, avanzado: true },
+  { label: "Control de complementos de pago", basico: false, avanzado: true },
+  { label: "Revisión de retenciones", basico: "Básica", avanzado: true },
+  { label: "Asesoría", basico: "Dudas relacionadas con el periodo", avanzado: "Asesoría fiscal personalizada" },
+  { label: "Trámites sencillos ante el SAT", basico: "Se cotizan por separado", avanzado: "Hasta 2 servicios adicionales al mes" },
+  { label: "Atención", basico: "Estándar", avanzado: "Prioritaria" },
+];
+
 export const contabilidadRegimenes: ContabilidadRegimen[] = [
-  { id: "resico", label: "RESICO", prices: [600, 900, 1200] },
-  { id: "empresarial", label: "Actividad Empresarial", prices: [1500, 2500, 3500] },
-  { id: "arrendamiento", label: "Arrendamiento", prices: [700, 1100, 1500] },
+  {
+    id: "resico",
+    label: "RESICO",
+    basicoPrice: 850,
+    avanzadoPrice: 1000,
+    rows: [
+      { label: "Declaraciones mensuales de ISR e IVA", basico: true, avanzado: true },
+      { label: "Declaración anual", basico: false, avanzado: true },
+      { label: "Facturación mensual", basico: "Hasta 5-10 CFDI", avanzado: "Hasta 20 CFDI" },
+      { label: "Revisión de ingresos y gastos", basico: "Revisión básica", avanzado: "Revisión detallada" },
+      { label: "Revisión de retenciones", basico: "Básica", avanzado: true },
+      { label: "Asesoría", basico: "Dudas relacionadas con el periodo", avanzado: "Asesoría fiscal personalizada" },
+      { label: "Trámites sencillos ante el SAT", basico: "Se cotizan por separado", avanzado: "Hasta 2 servicios adicionales al mes" },
+      { label: "Atención", basico: "Estándar", avanzado: "Prioritaria" },
+    ],
+  },
+  {
+    id: "empresarial",
+    label: "Actividad Empresarial",
+    basicoPrice: 1150,
+    avanzadoPrice: 1500,
+    rows: actEmpProfRows,
+  },
+  {
+    id: "arrendamiento",
+    label: "Arrendamiento",
+    basicoPrice: 750,
+    avanzadoPrice: 900,
+    rows: [
+      { label: "Declaraciones mensuales de ISR e IVA", basico: true, avanzado: true },
+      { label: "Declaración anual", basico: false, avanzado: true },
+      { label: "Emisión de recibos de arrendamiento", basico: "Hasta 5-10 CFDI", avanzado: "Hasta 20 CFDI" },
+      { label: "Cálculo de ISR e IVA", basico: true, avanzado: true },
+      { label: "Revisión de ingresos y deducciones", basico: "Revisión básica", avanzado: "Revisión detallada" },
+      { label: "Control de retenciones de personas morales", basico: "Básico", avanzado: "Revisión detallada" },
+      { label: "Asesoría", basico: "Dudas relacionadas con el periodo", avanzado: "Asesoría fiscal personalizada" },
+      { label: "Trámites sencillos ante el SAT", basico: "Se cotizan por separado", avanzado: "Hasta 2 servicios adicionales al mes" },
+      { label: "Atención", basico: "Estándar", avanzado: "Prioritaria" },
+    ],
+  },
   {
     id: "profesionales",
     label: "Régimen de Servicios Profesionales",
-    prices: [1000, 1500, 2000],
+    basicoPrice: 1150,
+    avanzadoPrice: 1500,
+    rows: actEmpProfRows,
   },
-  { id: "plataformas", label: "Plataformas Tecnológicas", prices: [800, 1300, 1800] },
+  {
+    id: "plataformas",
+    label: "Plataformas Tecnológicas",
+    basicoPrice: 650,
+    avanzadoPrice: 800,
+    rows: [
+      { label: "Revisión de ingresos de plataformas", basico: "1 plataforma", avanzado: "Hasta 3 plataformas" },
+      { label: "Declaraciones mensuales", basico: true, avanzado: true },
+      { label: "Declaración anual", basico: false, avanzado: true },
+      { label: "Revisión de retenciones de ISR e IVA", basico: "Básica", avanzado: "Detallada" },
+      { label: "Orientación sobre pagos definitivos o provisionales", basico: "General", avanzado: "Personalizada" },
+      { label: "Asesoría", basico: "Dudas relacionadas con el periodo", avanzado: "Asesoría fiscal personalizada" },
+      { label: "Trámites sencillos ante el SAT", basico: "Se cotizan por separado", avanzado: "Hasta 2 servicios adicionales al mes" },
+      { label: "Atención", basico: "Estándar", avanzado: "Prioritaria" },
+    ],
+  },
 ];
 
 export const formatMXN = (value: number) =>

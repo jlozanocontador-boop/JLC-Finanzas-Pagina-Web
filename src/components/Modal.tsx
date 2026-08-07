@@ -7,10 +7,12 @@ export default function Modal({
   title,
   onClose,
   children,
+  maxWidthClass = "max-w-lg",
 }: {
   title: string;
   onClose: () => void;
   children: React.ReactNode;
+  maxWidthClass?: string;
 }) {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -31,7 +33,7 @@ export default function Modal({
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white shadow-xl">
+      <div className={`relative max-h-[90vh] w-full ${maxWidthClass} overflow-y-auto rounded-xl bg-white shadow-xl`}>
         <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
           <h2 className="text-lg font-bold text-navy">{title}</h2>
           <button
