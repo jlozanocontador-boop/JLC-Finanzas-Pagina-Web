@@ -71,7 +71,6 @@ export async function POST(request: Request) {
               description: itemTitle,
               quantity: 1,
               unit_price: Number(transaction_amount),
-              currency_id: "MXN",
             },
           ],
         },
