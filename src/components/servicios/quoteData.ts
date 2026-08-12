@@ -251,3 +251,74 @@ export const contabilidadRegimenes: ContabilidadRegimen[] = [
 
 export const formatMXN = (value: number) =>
   new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 }).format(value);
+
+// Representa un paso elegido dentro del árbol de fiscalTramites: o bien la
+// etiqueta de una opción de un FollowUp, o bien el valor numérico capturado
+// en un NumberInput. Se usa para poder "repetir" el recorrido del usuario
+// de forma determinista tanto en el cliente como en el servidor, y así
+// calcular el precio final sin depender de lo que el navegador reporte.
+export type QuoteStep = { label: string } | { value: number };
+
+export function resolveFiscalQuote(
+  tramiteId: string,
+  steps: QuoteStep[]
+): { summary: string; price: number } | null {
+  const startTramite = fiscalTramites.find((t) => t.id === tramiteId);
+  if (!startTramite) return null;
+
+  let tramite: FiscalTramite = startTramite;
+  let selections: FollowUpOption[] = [];
+
+  for (const step of steps) {
+    const lastNode: FiscalTramite | FollowUpOption =
+      selections.length > 0 ? selections[selections.length - 1] : tramite;
+    const currentFollowUp = lastNode.followUp;
+    const currentNumberInput = lastNode.numberInput;
+
+    if (currentNumberInput && "value" in step) {
+      selections = [
+        ...selections,
+        {
+          label: `${currentNumberInput.summaryLabel}: ${formatMXN(step.value)}`,
+          price: currentNumberInput.computePrice(step.value),
+        },
+      ];
+      continue;
+    }
+
+    if (currentFollowUp && "label" in step) {
+      const opt = currentFollowUp.options.find((o) => o.label === step.label);
+      if (!opt) return null;
+
+      if (opt.redirectToId) {
+        const redirectTramite = fiscalTramites.find((t) => t.id === opt.redirectToId);
+        if (!redirectTramite || redirectTramite.price === undefined) return null;
+        tramite = redirectTramite;
+        selections = [];
+        continue;
+      }
+
+      selections = [...selections, opt];
+      continue;
+    }
+
+    return null;
+  }
+
+  const finalNode: FiscalTramite | FollowUpOption =
+    selections.length > 0 ? selections[selections.length - 1] : tramite;
+  if (finalNode.followUp || finalNode.numberInput) return null;
+
+  let resolvedPrice: number | undefined;
+  for (let i = selections.length - 1; i >= 0; i--) {
+    if (selections[i].price !== undefined) {
+      resolvedPrice = selections[i].price;
+      break;
+    }
+  }
+  if (resolvedPrice === undefined) resolvedPrice = tramite.price;
+  if (resolvedPrice === undefined) return null;
+
+  const summary = [tramite.label, ...selections.map((s) => s.label)].join(" — ");
+  return { summary, price: resolvedPrice };
+}

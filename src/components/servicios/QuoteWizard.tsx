@@ -13,6 +13,7 @@ import {
   type FollowUpOption,
   type ContabilidadRegimen,
   type NumberInputConfig,
+  type QuoteStep,
 } from "./quoteData";
 
 type QuoteType = "fiscal" | "contabilidad";
@@ -128,11 +129,13 @@ function CartSummary({ cart }: { cart: CartItem[] }) {
 function ResultStep({
   summary,
   price,
+  payHref,
   onBack,
   onAddAnother,
 }: {
   summary: string;
   price: number;
+  payHref: string;
   onBack?: () => void;
   onAddAnother: () => void;
 }) {
@@ -156,7 +159,7 @@ function ResultStep({
 
       <div className="mt-6 flex flex-col gap-2">
         <Link
-          href="/pagos"
+          href={payHref}
           className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
         >
           <CreditCard className="h-4 w-4" />
@@ -181,6 +184,7 @@ function FiscalWizard({
 }) {
   const [tramite, setTramite] = useState<FiscalTramite | null>(null);
   const [selections, setSelections] = useState<FollowUpOption[]>([]);
+  const [steps, setSteps] = useState<QuoteStep[]>([]);
   const [search, setSearch] = useState("");
 
   const selectOption = (opt: FollowUpOption) => {
@@ -189,10 +193,12 @@ function FiscalWizard({
       if (redirectTramite?.price !== undefined) {
         setTramite(redirectTramite);
         setSelections([]);
+        setSteps([]);
       }
       return;
     }
     setSelections([...selections, opt]);
+    setSteps([...steps, { label: opt.label }]);
   };
 
   if (tramite) {
@@ -200,10 +206,15 @@ function FiscalWizard({
     const currentFollowUp: FollowUp | null = lastNode.followUp ?? null;
     const currentNumberInput: NumberInputConfig | null = lastNode.numberInput ?? null;
 
-    const goBack = () =>
-      selections.length > 0
-        ? setSelections(selections.slice(0, -1))
-        : setTramite(null);
+    const goBack = () => {
+      if (selections.length > 0) {
+        setSelections(selections.slice(0, -1));
+        setSteps(steps.slice(0, -1));
+      } else {
+        setTramite(null);
+        setSteps([]);
+      }
+    };
 
     let resolvedPrice: number | undefined;
     for (let i = selections.length - 1; i >= 0; i--) {
@@ -217,10 +228,12 @@ function FiscalWizard({
     if (!currentFollowUp && !currentNumberInput && resolvedPrice !== undefined) {
       const summary = [tramite.label, ...selections.map((s) => s.label)].join(" — ");
       const price = resolvedPrice;
+      const payHref = `/pagos?tramiteId=${encodeURIComponent(tramite.id)}&steps=${encodeURIComponent(JSON.stringify(steps))}`;
       return (
         <ResultStep
           summary={summary}
           price={price}
+          payHref={payHref}
           onBack={goBack}
           onAddAnother={() => onAddToCart({ summary, price })}
         />
@@ -233,15 +246,16 @@ function FiscalWizard({
           <StepHeader step={selections.length + 2} onBack={goBack} />
           <NumberInputStep
             config={currentNumberInput}
-            onSubmit={(value) =>
+            onSubmit={(value) => {
               setSelections([
                 ...selections,
                 {
                   label: `${currentNumberInput.summaryLabel}: ${formatMXN(value)}`,
                   price: currentNumberInput.computePrice(value),
                 },
-              ])
-            }
+              ]);
+              setSteps([...steps, { value }]);
+            }}
           />
         </div>
       );
@@ -303,6 +317,7 @@ function FiscalWizard({
               onClick={() => {
                 setTramite(t);
                 setSelections([]);
+                setSteps([]);
               }}
             />
           ))
