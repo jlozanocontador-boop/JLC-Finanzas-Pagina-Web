@@ -91,7 +91,13 @@ export default function PaymentStep({
       const paymentResult = await res.json();
 
       if (!res.ok) {
-        throw new Error(paymentResult.error || "Ocurrió un error al procesar el pago.");
+        console.error("Detalle del error de Mercado Pago:", paymentResult);
+        const detailText = paymentResult.detail
+          ? ` (${paymentResult.detail})`
+          : "";
+        throw new Error(
+          (paymentResult.error || "Ocurrió un error al procesar el pago.") + detailText
+        );
       }
       if (paymentResult.status !== "approved") {
         throw new Error(

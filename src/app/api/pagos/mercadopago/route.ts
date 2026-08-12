@@ -85,8 +85,19 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Error al crear el pago en Mercado Pago:", error);
+    const mpError = error as {
+      message?: string;
+      causes?: unknown;
+      error?: string;
+      status?: number;
+    };
     return Response.json(
-      { error: "No se pudo procesar el pago." },
+      {
+        error: "No se pudo procesar el pago.",
+        detail: mpError?.message,
+        causes: mpError?.causes,
+        mpErrorCode: mpError?.error,
+      },
       { status: 500 }
     );
   }
