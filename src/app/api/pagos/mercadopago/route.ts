@@ -50,16 +50,31 @@ export async function POST(request: Request) {
   }
 
   try {
+    const itemTitle = description || "Servicio JLC Finanzas";
+
     const payment = new Payment(mpClient);
     const result = await payment.create({
       body: {
         transaction_amount: Number(transaction_amount),
         token,
-        description,
+        description: itemTitle,
+        statement_descriptor: "JLC FINANZAS",
         installments: installments ? Number(installments) : 1,
         payment_method_id,
         issuer_id: issuer_id ? Number(issuer_id) : undefined,
         payer: { email },
+        additional_info: {
+          items: [
+            {
+              id: "servicio-jlc",
+              title: itemTitle,
+              description: itemTitle,
+              quantity: 1,
+              unit_price: Number(transaction_amount),
+              currency_id: "MXN",
+            },
+          ],
+        },
       },
     });
 
