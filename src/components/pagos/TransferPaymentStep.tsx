@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft, Building2, Check, Copy, MessageCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { notifyDespachoPago } from "@/lib/despachoPagos";
 import { formatMXN } from "@/components/servicios/quoteData";
 import type { PaymentInfo } from "./PaymentFlow";
 
@@ -47,6 +48,13 @@ export default function TransferPaymentStep({
       .then(({ error }) => {
         if (error) console.error("Error al guardar comprobante:", error);
       });
+
+    notifyDespachoPago({
+      nombre: info.nombre,
+      servicio: info.servicio,
+      monto: info.monto,
+      descripcion: "Reportado por transferencia bancaria vía sitio web (pendiente de confirmar depósito)",
+    });
 
     setSent(true);
   }

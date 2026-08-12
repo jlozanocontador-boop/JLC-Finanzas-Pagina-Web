@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle2, Loader2, Lock } from "lucide-react";
 import { initMercadoPago, CardPayment } from "@mercadopago/sdk-react";
 import { supabase } from "@/lib/supabase";
+import { notifyDespachoPago } from "@/lib/despachoPagos";
 import { formatMXN } from "@/components/servicios/quoteData";
 import type { PaymentInfo } from "./PaymentFlow";
 
@@ -80,6 +81,13 @@ export default function CardPaymentStep({
           "Tu pago se procesó, pero hubo un problema al registrar tu comprobante. Contáctanos por WhatsApp para confirmar."
         );
       }
+
+      notifyDespachoPago({
+        nombre: info.nombre,
+        servicio: info.servicio,
+        monto: info.monto,
+        descripcion: `Pagado con tarjeta vía sitio web · Mercado Pago #${paymentResult.id}`,
+      });
 
       setStatus("success");
     } catch (err) {
