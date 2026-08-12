@@ -58,13 +58,7 @@ export default function CardPaymentStep({
       const paymentResult = await res.json();
 
       if (!res.ok) {
-        console.error("Detalle del error de Mercado Pago:", paymentResult);
-        const detailText = paymentResult.detail
-          ? ` (${paymentResult.detail})`
-          : "";
-        throw new Error(
-          (paymentResult.error || "Ocurrió un error al procesar el pago.") + detailText
-        );
+        throw new Error(paymentResult.error || "Ocurrió un error al procesar el pago.");
       }
       if (paymentResult.status !== "approved") {
         throw new Error(
