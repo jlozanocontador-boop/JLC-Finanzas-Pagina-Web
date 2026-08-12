@@ -1,5 +1,6 @@
 import { MessageCircle, Users, Check, Clock, ArrowRight } from "lucide-react";
 import { formatMXN } from "@/components/servicios/quoteData";
+import { ASESORIA_PRICES } from "@/lib/asesoriaPricing";
 import type { AsesoriaType } from "./BookingFlow";
 import WhatsAppCard from "./WhatsAppCard";
 
@@ -12,7 +13,7 @@ const options: (AsesoriaType & {
   {
     id: "sencilla",
     label: "Asesoría Sencilla",
-    price: 850,
+    price: ASESORIA_PRICES.sencilla,
     durationLabel: "25 min",
     slotInterval: 30,
     icon: MessageCircle,
@@ -27,7 +28,7 @@ const options: (AsesoriaType & {
   {
     id: "personalizada",
     label: "Asesoría Personalizada",
-    price: 1200,
+    price: ASESORIA_PRICES.personalizada,
     durationLabel: "55 min",
     slotInterval: 60,
     icon: Users,
