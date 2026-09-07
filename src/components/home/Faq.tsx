@@ -7,12 +7,12 @@ const faqs = [
   {
     question: "¿Qué documentos necesito para mi declaración anual?",
     answer:
-      "Generalmente necesitas tu constancia de situación fiscal, constancia de retenciones, comprobantes de deducciones personales y acceso al portal del SAT. Nosotros te guiamos paso a paso.",
+      "Los documentos necesarios dependen de tu situación fiscal. Podemos solicitar información como constancia de situación fiscal, comprobantes de ingresos, retenciones y deducciones personales. Antes de comenzar te indicamos exactamente qué necesitamos.",
   },
   {
     question: "¿Cuánto tarda el servicio?",
     answer:
-      "Depende del trámite. Una declaración anual puede estar lista en 24-48 horas. Trámites de regularización pueden tomar de 1 a 2 semanas según la complejidad.",
+      "El tiempo depende del servicio y de la situación fiscal de cada persona. Al recibir y revisar tu documentación te indicamos el tiempo estimado de atención antes de comenzar.",
   },
   {
     question: "¿Atienden por WhatsApp?",
@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "¿Qué pasa si tengo declaraciones atrasadas?",
     answer:
-      "No te preocupes. Podemos ayudarte a regularizar tu situación fiscal presentando las declaraciones pendientes y negociando con el SAT si es necesario.",
+      "Revisamos tu situación fiscal, identificamos las obligaciones pendientes y te ayudamos a presentar las declaraciones necesarias para regularizarte ante el SAT.",
   },
 ];
 

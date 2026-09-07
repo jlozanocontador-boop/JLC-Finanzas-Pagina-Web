@@ -38,7 +38,7 @@ export default function AudienceSection() {
             Para quién es
           </span>
           <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
-            ¿Cómo podemos ayudarte?
+            Encuentra el servicio que necesitas
           </h2>
         </div>
 

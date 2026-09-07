@@ -9,7 +9,9 @@ import {
   ShieldCheck,
   Calculator,
   Briefcase,
+  BookOpen,
   Plus,
+  Minus,
   ArrowRight,
 } from "lucide-react";
 
@@ -20,24 +22,29 @@ const services = [
     description: "Presentamos tu declaración anual de forma correcta y puntual.",
   },
   {
-    icon: TrendingUp,
-    title: "Devoluciones SAT",
-    description: "Recupera tu saldo a favor de manera rápida y segura.",
-  },
-  {
-    icon: Building2,
-    title: "Alta ante SAT",
-    description: "Te damos de alta con las obligaciones fiscales correctas.",
-  },
-  {
     icon: ShieldCheck,
     title: "Asesoría Fiscal",
     description: "Orientación personalizada para tomar mejores decisiones fiscales.",
   },
   {
+    icon: BookOpen,
+    title: "Contabilidad Mensual",
+    description: "Llevamos tu contabilidad mensual, declaraciones provisionales y cumplimiento de obligaciones periódicas.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Devoluciones SAT",
+    description: "Recupera tu saldo a favor de manera rápida y segura.",
+  },
+  {
     icon: Calculator,
     title: "Regularización Fiscal",
     description: "Ponte al corriente con el SAT sin complicaciones.",
+  },
+  {
+    icon: Building2,
+    title: "Alta y Trámites ante el SAT",
+    description: "Te damos de alta con las obligaciones fiscales correctas.",
   },
   {
     icon: Briefcase,
@@ -84,11 +91,11 @@ export default function Services() {
                   <span className="flex-1 text-xl font-bold text-navy sm:text-2xl">
                     {title}
                   </span>
-                  <Plus
-                    className={`h-6 w-6 shrink-0 text-gold transition-transform duration-200 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                  />
+                  {isOpen ? (
+                    <Minus className="h-6 w-6 shrink-0 text-gold" />
+                  ) : (
+                    <Plus className="h-6 w-6 shrink-0 text-gold" />
+                  )}
                 </button>
                 {isOpen && (
                   <p className="px-6 pb-6 pl-[calc(3.5rem+1.25rem+1.5rem)] text-gray-600 sm:text-lg">

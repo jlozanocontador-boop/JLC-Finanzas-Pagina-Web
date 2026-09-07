@@ -19,8 +19,8 @@ export default function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Tu contabilidad y obligaciones ante el{" "}
-            <span className="text-gold">SAT</span>, atendidas en línea
+            Tu contabilidad e impuestos al día, sin complicaciones con el{" "}
+            <span className="text-gold">SAT</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-white/70">
@@ -35,16 +35,16 @@ export default function Hero() {
               className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
             >
               <Calculator className="h-4 w-4" />
-              Cotizar Nuestro Servicio
+              Nuestros Servicios
             </Link>
             <a
               href="https://wa.me/528135780250"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="flex items-center justify-center gap-2 rounded-lg border border-green-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              <MessageCircle className="h-4 w-4" />
-              Enviar WhatsApp
+              <MessageCircle className="h-4 w-4 text-green-500" />
+              Consulta por WhatsApp
             </a>
           </div>
         </div>

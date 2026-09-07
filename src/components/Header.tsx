@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Phone, Mail, Clock, MessageCircle, Menu, X } from "lucide-react";
+import { Phone, Mail, Clock, Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -75,20 +75,11 @@ export default function Header() {
             </nav>
 
             <div className="hidden items-center gap-3 lg:flex">
-              <a
-                href="https://wa.me/528135780250"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-semibold text-green-600 transition hover:bg-green-50"
-              >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp
-              </a>
               <Link
                 href="/agendar-cita"
                 className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy transition hover:bg-gold-light"
               >
-                Agendar Cita
+                Agendar Asesoría
               </Link>
             </div>
 
@@ -117,21 +108,12 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="mt-2 flex flex-col gap-2">
-                  <a
-                    href="https://wa.me/528135780250"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 rounded-lg border border-green-500 px-4 py-2 text-sm font-semibold text-green-600"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp
-                  </a>
                   <Link
                     href="/agendar-cita"
                     onClick={() => setOpen(false)}
                     className="rounded-lg bg-gold px-4 py-2 text-center text-sm font-semibold text-navy"
                   >
-                    Agendar Cita
+                    Agendar Asesoría
                   </Link>
                 </div>
               </nav>

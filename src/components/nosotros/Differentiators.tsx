@@ -5,7 +5,7 @@ const points = [
   "Atención personalizada y directa, sin intermediarios",
   "Comunicación clara y sin tecnicismos innecesarios",
   "Procesos 100% digitales para tu comodidad",
-  "Respuesta rápida por WhatsApp y correo",
+  "Seguimiento directo por WhatsApp y medios digitales",
   "Experiencia comprobada con personas físicas y emprendedores",
   "Precios justos y transparentes, sin costos ocultos",
 ];
