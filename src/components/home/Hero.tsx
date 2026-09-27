@@ -19,8 +19,7 @@ export default function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Tu contabilidad e impuestos al día, sin complicaciones con el{" "}
-            <span className="text-gold">SAT</span>
+            Despacho Fiscal
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-white/70">

@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Phone, Mail, Clock, Menu, X } from "lucide-react";
+import { MessageCircle, Mail, Clock, Menu, X } from "lucide-react";
+import ContactPopoverLink from "@/components/ContactPopoverLink";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -24,20 +25,17 @@ export default function Header() {
       <div className="bg-navy text-white/80 text-xs sm:text-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 sm:gap-6">
-            <a
-              href="tel:+528135780250"
-              className="flex items-center gap-1.5 hover:text-white"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">(81) 3578-0250</span>
-            </a>
-            <a
+            <ContactPopoverLink
+              icon={MessageCircle}
+              label="(81) 3578-0250"
+              href="https://wa.me/528135780250"
+              external
+            />
+            <ContactPopoverLink
+              icon={Mail}
+              label="jlozanocontador@gmail.com"
               href="mailto:jlozanocontador@gmail.com"
-              className="flex items-center gap-1.5 hover:text-white"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">jlozanocontador@gmail.com</span>
-            </a>
+            />
           </div>
           <div className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" />

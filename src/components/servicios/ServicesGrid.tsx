@@ -5,7 +5,6 @@ import Link from "next/link";
 import { MessageCircle, CalendarCheck, Check } from "lucide-react";
 import { serviceCategories } from "./data";
 import QuoteWizard from "./QuoteWizard";
-import FiscalPricingCard from "./FiscalPricingCard";
 
 export default function ServicesGrid() {
   const [activeQuote, setActiveQuote] = useState<"fiscal" | "contabilidad" | null>(null);
@@ -15,15 +14,6 @@ export default function ServicesGrid() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {serviceCategories.map(({ title, description, badge, items, cta, quoteType }) => {
-            if (title === "Servicios Fiscales") {
-              return (
-                <FiscalPricingCard
-                  key={title}
-                  onOpenQuote={() => setActiveQuote("fiscal")}
-                />
-              );
-            }
-
             const cardClass =
               "group flex flex-col rounded-xl border border-gray-200 bg-white p-8 text-left shadow-sm transition hover:border-gold hover:bg-gold/5 hover:shadow-md";
 
