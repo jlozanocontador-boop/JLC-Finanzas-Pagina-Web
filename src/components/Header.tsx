@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Phone, Mail, Clock, Menu, X } from "lucide-react";
@@ -49,14 +50,16 @@ export default function Header() {
         <div className="bg-white shadow-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy text-sm font-bold text-white">
-                JLC
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-lg font-bold text-navy">JLC Finanzas</span>
-                <span className="text-[11px] font-medium tracking-wide text-gray-500">
-                  DESPACHO FISCAL
-                </span>
+              <Image
+                src="/logo.png"
+                alt="JLC Finanzas"
+                width={1200}
+                height={587}
+                priority
+                className="h-9 w-auto sm:h-10"
+              />
+              <span className="hidden text-[11px] font-medium tracking-wide text-gray-500 sm:inline">
+                DESPACHO FISCAL
               </span>
             </Link>
 

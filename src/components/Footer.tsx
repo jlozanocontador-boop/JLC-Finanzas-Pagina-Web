@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "@/components/icons/SocialIcons";
 
@@ -25,14 +26,15 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <Link href="/" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold text-sm font-bold text-navy">
-              JLC
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-lg font-bold text-white">JLC Finanzas</span>
-              <span className="text-[11px] font-medium tracking-wide text-white/60">
-                DESPACHO FISCAL
-              </span>
+            <Image
+              src="/logo-white.png"
+              alt="JLC Finanzas"
+              width={1200}
+              height={587}
+              className="h-9 w-auto"
+            />
+            <span className="text-[11px] font-medium tracking-wide text-white/60">
+              DESPACHO FISCAL
             </span>
           </Link>
           <p className="mt-4 text-sm text-white/70">

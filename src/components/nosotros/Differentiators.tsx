@@ -3,10 +3,6 @@ import { CheckCircle2, Award, CalendarCheck } from "lucide-react";
 
 const points = [
   {
-    title: "Atención personalizada",
-    description: "Seguimiento directo a tu situación fiscal.",
-  },
-  {
     title: "Servicio 100% en línea",
     description: "Realiza tu proceso sin acudir a una oficina.",
   },
@@ -21,7 +17,7 @@ const points = [
   },
   {
     title: "Seguimiento continuo",
-    description: "Te mantenemos informados durante cada etapa del servicio.",
+    description: "Te mantendremos informados durante cada etapa del servicio.",
   },
 ];
 
