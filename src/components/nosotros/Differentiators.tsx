@@ -2,12 +2,27 @@ import Link from "next/link";
 import { CheckCircle2, Award, CalendarCheck } from "lucide-react";
 
 const points = [
-  "Atención personalizada y directa, sin intermediarios",
-  "Comunicación clara y sin tecnicismos innecesarios",
-  "Procesos 100% digitales para tu comodidad",
-  "Seguimiento directo por WhatsApp y medios digitales",
-  "Experiencia comprobada con personas físicas y emprendedores",
-  "Precios justos y transparentes, sin costos ocultos",
+  {
+    title: "Atención personalizada",
+    description: "Seguimiento directo a tu situación fiscal.",
+  },
+  {
+    title: "Servicio 100% en línea",
+    description: "Realiza tu proceso sin acudir a una oficina.",
+  },
+  {
+    title: "Especialización en personas físicas",
+    description:
+      "RESICO, Arrendamiento, Actividad Empresarial, Servicios Profesionales y Plataformas Tecnológicas.",
+  },
+  {
+    title: "Información clara",
+    description: "Entiende qué se presenta, cuánto debes pagar y qué sigue.",
+  },
+  {
+    title: "Seguimiento continuo",
+    description: "Te mantenemos informados durante cada etapa del servicio.",
+  },
 ];
 
 export default function Differentiators() {
@@ -19,14 +34,20 @@ export default function Differentiators() {
             ¿Qué nos hace diferentes?
           </span>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            No somos un despacho más
+            ¿Por qué JLC Finanzas?
           </h2>
+          <p className="mt-3 text-white/70">
+            Atención fiscal clara, cercana y completamente en línea.
+          </p>
 
           <ul className="mt-8 space-y-4">
-            {points.map((point) => (
-              <li key={point} className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-gold" />
-                <span className="text-white/80">{point}</span>
+            {points.map(({ title, description }) => (
+              <li key={title} className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                <div>
+                  <p className="font-semibold text-white">{title}</p>
+                  <p className="text-white/70">{description}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -34,9 +55,12 @@ export default function Differentiators() {
 
         <div className="rounded-2xl bg-white/10 p-10 text-center">
           <Award className="mx-auto h-10 w-10 text-gold" />
-          <p className="mt-4 text-3xl font-bold text-white">+500 Clientes</p>
+          <p className="mt-4 text-2xl font-bold text-white">
+            Atención directa y personalizada
+          </p>
           <p className="mt-1 text-white/70">
-            confían en nosotros para sus trámites fiscales
+            Recibes atención directa para resolver dudas y dar seguimiento a
+            tu situación fiscal.
           </p>
           <Link
             href="/agendar-cita"

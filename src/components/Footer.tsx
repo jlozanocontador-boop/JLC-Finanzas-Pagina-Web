@@ -133,12 +133,20 @@ export default function Footer() {
             reservados.
           </span>
           <div className="flex items-center gap-4">
-            <Link href="/aviso-de-privacidad" className="hover:text-white/80">
+            <a
+              href="/aviso-de-privacidad.pdf"
+              download
+              className="hover:text-white/80"
+            >
               Aviso de Privacidad
-            </Link>
-            <Link href="/terminos-y-condiciones" className="hover:text-white/80">
+            </a>
+            <a
+              href="/terminos-y-condiciones.pdf"
+              download
+              className="hover:text-white/80"
+            >
               Términos y Condiciones
-            </Link>
+            </a>
           </div>
         </div>
       </div>
