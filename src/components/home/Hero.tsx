@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, Calculator } from "lucide-react";
+import { Calculator } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 export default function Hero() {
   return (
@@ -28,23 +31,15 @@ export default function Hero() {
             y seguimiento por WhatsApp.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8">
             <Link
               href="/servicios"
-              className="flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
+              onClick={() => track("nav_click", { location: "hero", target: "servicios" })}
+              className="flex w-fit items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
             >
               <Calculator className="h-4 w-4" />
               Nuestros Servicios
             </Link>
-            <a
-              href="https://wa.me/528135780250"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border border-green-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              <MessageCircle className="h-4 w-4 text-green-500" />
-              Consulta por WhatsApp
-            </a>
           </div>
         </div>
       </div>

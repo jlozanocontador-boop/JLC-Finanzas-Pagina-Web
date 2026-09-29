@@ -4,11 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   FileText,
-  TrendingUp,
-  Building2,
   ShieldCheck,
   Calculator,
-  Briefcase,
   BookOpen,
   Plus,
   Minus,
@@ -32,24 +29,9 @@ const services = [
     description: "Llevamos tu contabilidad mensual, declaraciones provisionales y cumplimiento de obligaciones periódicas.",
   },
   {
-    icon: TrendingUp,
-    title: "Devoluciones SAT",
-    description: "Recupera tu saldo a favor de manera rápida y segura.",
-  },
-  {
     icon: Calculator,
     title: "Regularización Fiscal",
     description: "Ponte al corriente con el SAT sin complicaciones.",
-  },
-  {
-    icon: Building2,
-    title: "Alta y Trámites ante el SAT",
-    description: "Te damos de alta con las obligaciones fiscales correctas.",
-  },
-  {
-    icon: Briefcase,
-    title: "Facturación",
-    description: "Apoyo con emisión de facturas y administración contable.",
   },
 ];
 

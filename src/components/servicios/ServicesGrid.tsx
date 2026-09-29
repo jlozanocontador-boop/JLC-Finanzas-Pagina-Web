@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, CalendarCheck, Check } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { serviceCategories } from "./data";
 import QuoteWizard from "./QuoteWizard";
 
@@ -53,14 +54,26 @@ export default function ServicesGrid() {
 
             if (cta === "cotizar" && quoteType) {
               return (
-                <button key={title} onClick={() => setActiveQuote(quoteType)} className={cardClass}>
+                <button
+                  key={title}
+                  onClick={() => {
+                    track("servicio_card_click", { title, action: "cotizar" });
+                    setActiveQuote(quoteType);
+                  }}
+                  className={cardClass}
+                >
                   {cardContent}
                 </button>
               );
             }
 
             return (
-              <Link key={title} href="/agendar-cita" className={cardClass}>
+              <Link
+                key={title}
+                href="/agendar-cita"
+                onClick={() => track("servicio_card_click", { title, action: "agendar" })}
+                className={cardClass}
+              >
                 {cardContent}
               </Link>
             );

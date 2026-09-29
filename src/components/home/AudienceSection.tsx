@@ -1,33 +1,48 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+"use client";
 
-const audiences = [
+import Link from "next/link";
+import { ArrowRight, FileText, Home, Briefcase, type LucideIcon } from "lucide-react";
+import { track } from "@vercel/analytics";
+
+const groupedAudiences: { icon: LucideIcon; title: string; description: string }[] = [
   {
-    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=80",
+    icon: FileText,
     title: "Soy RESICO",
-    description:
-      "Declaraciones mensuales, facturación, revisión de ingresos y gastos, orientación y cumplimiento ante el SAT.",
+    description: "Declaraciones mensuales, facturación y seguimiento.",
   },
   {
-    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80",
+    icon: Home,
     title: "Rento una propiedad",
-    description:
-      "Cálculo y presentación de declaraciones de arrendamiento, revisión de facturas y seguimiento mensual.",
+    description: "Declaraciones de arrendamiento y revisión mensual.",
   },
   {
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80",
+    icon: Briefcase,
     title: "Trabajo por mi cuenta",
-    description:
-      "Atención para profesionistas, prestadores de servicios y personas con actividad empresarial.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80",
-    title: "Tengo declaraciones pendientes",
-    description:
-      "Revisamos tu situación, identificamos obligaciones atrasadas y preparamos un plan para regularizarte.",
+    description: "Atención para profesionistas y actividad empresarial.",
   },
 ];
+
+function AudienceRow({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex items-start gap-4 p-6">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+        <Icon className="h-6 w-6" />
+      </span>
+      <div>
+        <h3 className="text-lg font-bold text-navy">{title}</h3>
+        <p className="mt-1 text-sm text-gray-600">{description}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function AudienceSection() {
   return (
@@ -42,33 +57,20 @@ export default function AudienceSection() {
           </h2>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {audiences.map(({ image, title, description }) => (
-            <div
-              key={title}
-              className="flex flex-col overflow-hidden rounded-xl bg-gray-50 ring-1 ring-gray-100"
-            >
-              <div className="relative aspect-4/3">
-                <Image
-                  src={image}
-                  alt={title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-lg font-bold text-navy">{title}</h3>
-                <p className="mt-2 flex-1 text-sm text-gray-600">{description}</p>
-                <Link
-                  href="/servicios"
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:text-gold-light"
-                >
-                  Ver servicio
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          ))}
+        <div className="mx-auto mt-12 max-w-2xl">
+          <div className="divide-y divide-gray-100 overflow-hidden rounded-xl bg-gray-50 ring-1 ring-gray-100">
+            {groupedAudiences.map((audience) => (
+              <AudienceRow key={audience.title} {...audience} />
+            ))}
+          </div>
+          <Link
+            href="/agendar-cita"
+            onClick={() => track("agendar_click", { location: "home_audience" })}
+            className="mt-4 flex items-center justify-center gap-1.5 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-light"
+          >
+            Agendar Asesoría
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

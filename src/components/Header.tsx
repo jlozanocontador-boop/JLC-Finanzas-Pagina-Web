@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { MessageCircle, Mail, Clock, Menu, X } from "lucide-react";
-import ContactPopoverLink from "@/components/ContactPopoverLink";
+import { Menu, X } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -22,28 +22,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-navy text-white/80 text-xs sm:text-sm">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 sm:gap-6">
-            <ContactPopoverLink
-              icon={MessageCircle}
-              label="(81) 3578-0250"
-              href="https://wa.me/528135780250"
-              external
-            />
-            <ContactPopoverLink
-              icon={Mail}
-              label="jlozanocontador@gmail.com"
-              href="mailto:jlozanocontador@gmail.com"
-            />
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Clock className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Lun-Jue 19-23h · Dom 8-14h</span>
-          </div>
-        </div>
-      </div>
-
       {!isCheckout && (
         <div className="bg-white shadow-sm">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
@@ -78,6 +56,7 @@ export default function Header() {
             <div className="hidden items-center gap-3 lg:flex">
               <Link
                 href="/agendar-cita"
+                onClick={() => track("agendar_click", { location: "header_desktop" })}
                 className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-navy transition hover:bg-gold-light"
               >
                 Agendar Asesoría
@@ -111,7 +90,10 @@ export default function Header() {
                 <div className="mt-2 flex flex-col gap-2">
                   <Link
                     href="/agendar-cita"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      track("agendar_click", { location: "header_mobile" });
+                    }}
                     className="rounded-lg bg-gold px-4 py-2 text-center text-sm font-semibold text-navy"
                   >
                     Agendar Asesoría
